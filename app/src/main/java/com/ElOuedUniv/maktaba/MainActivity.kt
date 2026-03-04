@@ -12,7 +12,6 @@ import com.ElOuedUniv.maktaba.presentation.book.BookListView
 import com.ElOuedUniv.maktaba.presentation.category.CategoryListView
 import com.ElOuedUniv.maktaba.presentation.theme.MaktabaTheme
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     

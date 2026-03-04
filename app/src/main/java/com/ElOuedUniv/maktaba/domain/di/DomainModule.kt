@@ -2,6 +2,7 @@ package com.ElOuedUniv.maktaba.domain.di
 
 import com.ElOuedUniv.maktaba.data.repository.BookRepository
 import com.ElOuedUniv.maktaba.data.repository.CategoryRepository
+import com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase
 import com.ElOuedUniv.maktaba.domain.usecase.GetBooksUseCase
 import com.ElOuedUniv.maktaba.domain.usecase.GetCategoriesUseCase
 import dagger.Module
@@ -34,7 +35,7 @@ object DomainModule {
     @Singleton
     fun provideAddBookUseCase(
         bookRepository: BookRepository
-    ): com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase {
-        return com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase(bookRepository)
+    ): AddBookUseCase {
+        return AddBookUseCase(bookRepository)
     }
 }
