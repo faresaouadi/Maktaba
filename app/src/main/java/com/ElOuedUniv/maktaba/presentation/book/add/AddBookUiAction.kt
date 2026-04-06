@@ -1,5 +1,3 @@
-package com.eloueduniv.maktaba.presentation.book.add
-
 sealed class AddBookUiAction {
     data class OnTitleChange(val title: String) : AddBookUiAction()
     data class OnIsbnChange(val isbn: String) : AddBookUiAction()
