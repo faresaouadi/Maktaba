@@ -1,6 +1,6 @@
-package com.ElOuedUniv.maktaba.presentation.category
+package com.eloueduniv.maktaba.presentation.category
 
-import com.ElOuedUniv.maktaba.data.model.Category
+import com.eloueduniv.maktaba.data.model.Category
 
 /**
  * UI State for the Category list screen.

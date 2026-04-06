@@ -1,6 +1,7 @@
-package com.ElOuedUniv.maktaba.data.repository
+package com.eloueduniv.maktaba.data.repository
 
-import com.ElOuedUniv.maktaba.data.model.Category
+import com.eloueduniv.maktaba.R
+import com.eloueduniv.maktaba.data.model.Category
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -14,17 +15,20 @@ class CategoryRepositoryImpl @Inject constructor() : CategoryRepository {
         Category(
             id = "1",
             name = "Programming",
-            description = "Books about software development and coding"
+            description = "Books about software development and coding",
+            iconRes = R.drawable.ic_launcher_foreground
         ),
         Category(
             id = "2",
             name = "Algorithms",
-            description = "Books about algorithms and data structures"
+            description = "Books about algorithms and data structures",
+            iconRes = R.drawable.ic_launcher_foreground
         ),
         Category(
             id = "3",
             name = "Databases",
-            description = "Books about database design and management"
+            description = "Books about database design and management",
+            iconRes = R.drawable.ic_launcher_foreground
         )
     )
 
@@ -33,7 +37,7 @@ class CategoryRepositoryImpl @Inject constructor() : CategoryRepository {
     }
     
     override fun getAllCategories(): Flow<List<Category>> = flow {
-        delay(2000) // Simulate delay
+        delay(1000) // Simulate delay
         emitAll(categoriesFlow)
     }
 

@@ -1,4 +1,4 @@
-package com.ElOuedUniv.maktaba.presentation.category
+package com.eloueduniv.maktaba.presentation.category
 
 /**
  * One-time UI events (System events) for the Category screen.

@@ -1,4 +1,4 @@
-package com.ElOuedUniv.maktaba.presentation.onboarding
+package com.eloueduniv.maktaba.presentation.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

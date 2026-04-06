@@ -1,7 +1,7 @@
-package com.ElOuedUniv.maktaba.domain.usecase
+package com.eloueduniv.maktaba.domain.usecase
 
-import com.ElOuedUniv.maktaba.data.model.Category
-import com.ElOuedUniv.maktaba.data.repository.CategoryRepository
+import com.eloueduniv.maktaba.data.model.Category
+import com.eloueduniv.maktaba.data.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 
 // TODO: Implement this use case

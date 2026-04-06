@@ -1,10 +1,11 @@
-package com.ElOuedUniv.maktaba.domain.di
+package com.eloueduniv.maktaba.domain.di
 
-import com.ElOuedUniv.maktaba.data.repository.BookRepository
-import com.ElOuedUniv.maktaba.data.repository.CategoryRepository
-import com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase
-import com.ElOuedUniv.maktaba.domain.usecase.GetBooksUseCase
-import com.ElOuedUniv.maktaba.domain.usecase.GetCategoriesUseCase
+import com.eloueduniv.maktaba.data.repository.BookRepository
+import com.eloueduniv.maktaba.data.repository.CategoryRepository
+import com.eloueduniv.maktaba.domain.usecase.AddBookUseCase
+import com.eloueduniv.maktaba.domain.usecase.GetBooksUseCase
+import com.eloueduniv.maktaba.domain.usecase.GetCategoriesUseCase
+import com.eloueduniv.maktaba.domain.usecase.GetBookByIsbnUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,7 +44,7 @@ object DomainModule {
     @Singleton
     fun provideGetBookByIsbnUseCase(
         bookRepository: BookRepository
-    ): com.ElOuedUniv.maktaba.domain.usecase.GetBookByIsbnUseCase {
-        return com.ElOuedUniv.maktaba.domain.usecase.GetBookByIsbnUseCase(bookRepository)
+    ): GetBookByIsbnUseCase {
+        return GetBookByIsbnUseCase(bookRepository)
     }
 }

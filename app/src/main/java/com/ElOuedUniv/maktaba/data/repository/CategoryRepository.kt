@@ -1,6 +1,6 @@
-package com.ElOuedUniv.maktaba.data.repository
+package com.eloueduniv.maktaba.data.repository
 
-import com.ElOuedUniv.maktaba.data.model.Category
+import com.eloueduniv.maktaba.data.model.Category
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {

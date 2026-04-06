@@ -1,6 +1,6 @@
-package com.ElOuedUniv.maktaba.data.repository
+package com.eloueduniv.maktaba.data.repository
 
-import com.ElOuedUniv.maktaba.data.model.Book
+import com.eloueduniv.maktaba.data.model.Book
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -11,11 +11,11 @@ import javax.inject.Inject
 class BookRepositoryImpl @Inject constructor() : BookRepository {
 
     private val _booksList = mutableListOf(
-        Book(isbn = "11111", title = "Clean Code", nbPages = 10),
-        Book(isbn = "22222", title = "The Pragmatic Programmer", nbPages = 0),
-        Book(isbn = "33333", title = "Design Patterns", nbPages = 0),
-        Book(isbn = "44444", title = "Refactoring", nbPages = 0),
-        Book(isbn = "55555", title = "Head First Design Patterns", nbPages = 0)
+        Book(isbn = "9780132350884", title = "Clean Code", nbPages = 464, status = "Reading"),
+        Book(isbn = "9780201616224", title = "The Pragmatic Programmer", nbPages = 352, status = "To Read"),
+        Book(isbn = "9780201633610", title = "Design Patterns", nbPages = 395, status = "Finished"),
+        Book(isbn = "9780201485677", title = "Refactoring", nbPages = 448, status = "To Read"),
+        Book(isbn = "9780596007126", title = "Head First Design Patterns", nbPages = 694, status = "Reading")
     )
 
     private val booksFlow = MutableSharedFlow<List<Book>>(replay = 1).apply {
@@ -23,7 +23,7 @@ class BookRepositoryImpl @Inject constructor() : BookRepository {
     }
     
     override fun getAllBooks(): Flow<List<Book>> = flow {
-        delay(2000) // Simulate delay
+        delay(1000) // Simulate delay
         emitAll(booksFlow)
     }
 

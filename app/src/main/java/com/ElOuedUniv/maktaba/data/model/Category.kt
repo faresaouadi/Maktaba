@@ -1,8 +1,10 @@
-package com.ElOuedUniv.maktaba.data.model
+package com.eloueduniv.maktaba.data.model
 
-// TODO: Complete the Category data class implementation
+import androidx.annotation.DrawableRes
+
 data class Category(
     val id: String,
     val name: String,
-    val description: String
+    val description: String,
+    @DrawableRes val iconRes: Int
 )

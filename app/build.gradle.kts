@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ElOuedUniv.maktaba"
+    namespace = "com.eloueduniv.maktaba"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.ElOuedUniv.maktaba"
+        applicationId = "com.eloueduniv.maktaba"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

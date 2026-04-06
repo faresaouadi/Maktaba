@@ -1,4 +1,4 @@
-package com.ElOuedUniv.maktaba.presentation.navigation
+package com.eloueduniv.maktaba.presentation.navigation
 
 sealed class Screen(val route: String) {
     object Onboarding : Screen("onboarding")

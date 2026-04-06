@@ -1,4 +1,4 @@
-package com.ElOuedUniv.maktaba.presentation.book.add
+package com.eloueduniv.maktaba.presentation.book.add
 
 sealed class AddBookUiAction {
     data class OnTitleChange(val title: String) : AddBookUiAction()

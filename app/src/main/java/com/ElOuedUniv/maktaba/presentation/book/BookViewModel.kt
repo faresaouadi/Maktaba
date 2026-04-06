@@ -1,10 +1,10 @@
-package com.ElOuedUniv.maktaba.presentation.book
+package com.eloueduniv.maktaba.presentation.book
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ElOuedUniv.maktaba.data.model.Book
-import com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase
-import com.ElOuedUniv.maktaba.domain.usecase.GetBooksUseCase
+import com.eloueduniv.maktaba.data.model.Book
+import com.eloueduniv.maktaba.domain.usecase.AddBookUseCase
+import com.eloueduniv.maktaba.domain.usecase.GetBooksUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,17 +40,14 @@ class BookViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Exercise 3 - Handle UI Actions
-     */
     fun onAction(action: BookUiAction) {
         when (action) {
             BookUiAction.RefreshBooks -> refreshBooks()
             BookUiAction.OnAddBookClick -> {
-                _uiState.update { it.copy(isAddingBook = true) }
+                // Handle
             }
             BookUiAction.OnDismissAddBook -> {
-                _uiState.update { it.copy(isAddingBook = false) }
+                // Handle
             }
             is BookUiAction.OnAddBookConfirm -> {
                 val newBook = Book(
@@ -59,7 +56,6 @@ class BookViewModel @Inject constructor(
                     nbPages = action.nbPages
                 )
                 addBookUseCase(newBook)
-                _uiState.update { it.copy(isAddingBook = false) }
             }
         }
     }

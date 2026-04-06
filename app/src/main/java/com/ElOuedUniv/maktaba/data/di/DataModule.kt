@@ -1,9 +1,9 @@
-package com.ElOuedUniv.maktaba.data.di
+package com.eloueduniv.maktaba.data.di
 
-import com.ElOuedUniv.maktaba.data.repository.BookRepository
-import com.ElOuedUniv.maktaba.data.repository.BookRepositoryImpl
-import com.ElOuedUniv.maktaba.data.repository.CategoryRepository
-import com.ElOuedUniv.maktaba.data.repository.CategoryRepositoryImpl
+import com.eloueduniv.maktaba.data.repository.BookRepository
+import com.eloueduniv.maktaba.data.repository.BookRepositoryImpl
+import com.eloueduniv.maktaba.data.repository.CategoryRepository
+import com.eloueduniv.maktaba.data.repository.CategoryRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

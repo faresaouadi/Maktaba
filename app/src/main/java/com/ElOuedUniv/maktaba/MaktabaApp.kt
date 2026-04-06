@@ -1,4 +1,4 @@
-package com.ElOuedUniv.maktaba
+package com.eloueduniv.maktaba
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
