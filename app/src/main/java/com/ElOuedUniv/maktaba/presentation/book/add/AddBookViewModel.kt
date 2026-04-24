@@ -31,6 +31,9 @@ class AddBookViewModel @Inject constructor(
                 _uiState.update { it.copy(nbPages = action.pages) }
                 validateInputs()
             }
+            is AddBookUiAction.OnImageSelected -> {
+                _uiState.update { it.copy(imageUrl = action.uri) }
+            }
             AddBookUiAction.OnAddClick -> {
                 if (_uiState.value.isFormValid) {
                     addBook()
@@ -63,7 +66,8 @@ class AddBookViewModel @Inject constructor(
         val book = Book(
             isbn = currentState.isbn,
             title = currentState.title,
-            nbPages = currentState.nbPages.toIntOrNull() ?: 0
+            nbPages = currentState.nbPages.toIntOrNull() ?: 0,
+            imageUrl = currentState.imageUrl
         )
         addBookUseCase(book)
         _uiState.update { it.copy(isSuccess = true) }
