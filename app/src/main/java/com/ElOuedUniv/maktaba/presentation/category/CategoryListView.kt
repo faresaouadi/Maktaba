@@ -6,12 +6,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -99,6 +103,18 @@ fun CategoryList(
 
 @Composable
 fun CategoryItem(category: Category) {
+    val context = LocalContext.current
+    
+    // Safely check if resource exists to prevent crash
+    val isValidResource = remember(category.iconRes) {
+        try {
+            context.resources.getResourceName(category.iconRes)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,7 +136,7 @@ fun CategoryItem(category: Category) {
                 color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
             ) {
                 Icon(
-                    painter = painterResource(id = category.iconRes),
+                    painter = if (isValidResource) painterResource(id = category.iconRes) else rememberVectorPainter(Icons.Default.Folder),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(16.dp)

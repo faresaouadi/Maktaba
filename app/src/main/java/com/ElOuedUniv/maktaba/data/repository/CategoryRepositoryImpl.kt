@@ -40,7 +40,7 @@ class CategoryRepositoryImpl @Inject constructor() : CategoryRepository {
         emitAll(categoriesFlow)
     }
 
-    override fun getCategoryById(id: String): Category? {
+    override suspend fun getCategoryById(id: String): Category? {
         return _categoriesList.find { it.id == id }
     }
 }

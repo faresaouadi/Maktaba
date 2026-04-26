@@ -1,17 +1,21 @@
 package com.ElOuedUniv.maktaba.presentation.book.add
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ElOuedUniv.maktaba.data.model.Book
 import com.ElOuedUniv.maktaba.domain.usecase.AddBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddBookViewModel @Inject constructor(
-    private val addBookUseCase: AddBookUseCase
+    private val addBookUseCase: AddBookUseCase,
+    private val application: Application
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(AddBookUiState())
@@ -30,6 +34,9 @@ class AddBookViewModel @Inject constructor(
             is AddBookUiAction.OnPagesChange -> {
                 _uiState.update { it.copy(nbPages = action.pages) }
                 validateInputs()
+            }
+            is AddBookUiAction.OnImageSelected -> {
+                _uiState.update { it.copy(imageUri = action.uri) }
             }
             AddBookUiAction.OnAddClick -> {
                 if (_uiState.value.isFormValid) {
@@ -66,7 +73,23 @@ class AddBookViewModel @Inject constructor(
             title = currentState.title,
             nbPages = currentState.nbPages.toIntOrNull() ?: 0
         )
-        addBookUseCase(book)
-        _uiState.update { it.copy(isSuccess = true) }
+        
+        val imageBytes = currentState.imageUri?.let { uri ->
+            try {
+                application.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+            } catch (e: Exception) {
+                null
+            }
+        }
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            try {
+                addBookUseCase(book, imageBytes)
+                _uiState.update { it.copy(isSuccess = true, isLoading = false) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isLoading = false, errorMessage = e.message) }
+            }
+        }
     }
 }

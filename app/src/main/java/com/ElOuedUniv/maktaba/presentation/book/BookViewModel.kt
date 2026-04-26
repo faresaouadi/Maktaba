@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
@@ -23,12 +24,15 @@ class BookViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(BookUiState())
     val uiState: StateFlow<BookUiState> = _uiState.asStateFlow()
 
+    private var fetchJob: Job? = null
+
     init {
         loadBooks()
     }
 
     fun loadBooks() {
-        viewModelScope.launch {
+        fetchJob?.cancel()
+        fetchJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             getBooksUseCase()
                 .catch { e ->
@@ -58,8 +62,15 @@ class BookViewModel @Inject constructor(
                     title = action.title,
                     nbPages = action.nbPages
                 )
-                addBookUseCase(newBook)
-                _uiState.update { it.copy(isAddingBook = false) }
+                viewModelScope.launch {
+                    try {
+                        addBookUseCase(newBook)
+                        _uiState.update { it.copy(isAddingBook = false) }
+                        loadBooks() // Refresh the list after adding
+                    } catch (e: Exception) {
+                        _uiState.update { it.copy(errorMessage = e.message) }
+                    }
+                }
             }
         }
     }

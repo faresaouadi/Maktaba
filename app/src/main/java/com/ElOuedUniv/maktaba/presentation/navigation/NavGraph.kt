@@ -1,23 +1,36 @@
 package com.ElOuedUniv.maktaba.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ElOuedUniv.maktaba.data.repository.UserPreferencesRepository
 import com.ElOuedUniv.maktaba.presentation.book.BookListView
 import com.ElOuedUniv.maktaba.presentation.book.add.AddBookView
 import com.ElOuedUniv.maktaba.presentation.book.detail.BookDetailView
 import com.ElOuedUniv.maktaba.presentation.category.CategoryListView
 import com.ElOuedUniv.maktaba.presentation.onboarding.OnboardingView
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun NavGraph(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    userPreferencesRepository: UserPreferencesRepository // You might want to wrap this in a ViewModel
 ) {
+    val hasCompletedOnboarding by userPreferencesRepository.hasCompletedOnboarding.collectAsState(initial = null)
+
+    if (hasCompletedOnboarding == null) {
+        // Loading state
+        return
+    }
+
     NavHost(
         navController = navController,
-        startDestination = Screen.Onboarding.route
+        startDestination = if (hasCompletedOnboarding == true) Screen.BookList.route else Screen.Onboarding.route
     ) {
         composable(Screen.Onboarding.route) {
             OnboardingView(
